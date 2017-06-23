@@ -27,6 +27,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var InfiniteScroll = function (_Component) {
   _inherits(InfiniteScroll, _Component);
 
+  _createClass(InfiniteScroll, [{
+    key: 'getChildContext',
+    value: function getChildContext() {
+      return {
+        infiniteScrollComponent: this
+      };
+    }
+  }]);
+
   function InfiniteScroll(props) {
     _classCallCheck(this, InfiniteScroll);
 
@@ -40,6 +49,7 @@ var InfiniteScroll = function (_Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.pageLoaded = this.props.pageStart;
+      this.scrollWindow = this.props.useWindow === false ? this.scrollComponent.parentNode : window;
       this.attachScrollListener();
     }
   }, {
@@ -198,6 +208,9 @@ InfiniteScroll.defaultProps = {
   isReverse: false,
   useCapture: false,
   loader: null
+};
+InfiniteScroll.childContextTypes = {
+  infiniteScrollComponent: _propTypes2.default.object
 };
 exports.default = InfiniteScroll;
 module.exports = exports['default'];

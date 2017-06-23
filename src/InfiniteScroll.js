@@ -33,6 +33,16 @@ export default class InfiniteScroll extends Component {
     loader: null,
   };
 
+  static childContextTypes = {
+    infiniteScrollComponent: PropTypes.object,
+  };
+
+  getChildContext() {
+    return {
+      infiniteScrollComponent: this
+    }
+  }
+
   constructor(props) {
     super(props);
 
@@ -41,6 +51,7 @@ export default class InfiniteScroll extends Component {
 
   componentDidMount() {
     this.pageLoaded = this.props.pageStart;
+    this.scrollWindow = this.props.useWindow === false ? this.scrollComponent.parentNode : window;
     this.attachScrollListener();
   }
 
