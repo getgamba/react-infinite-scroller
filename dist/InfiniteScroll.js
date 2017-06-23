@@ -43,9 +43,28 @@ var InfiniteScroll = function (_Component) {
       this.attachScrollListener();
     }
   }, {
+    key: 'componentWillUpdate',
+    value: function componentWillUpdate() {
+      if (this.props.isReverse) {
+        var scrollEl = window;
+        if (this.props.useWindow === false) {
+          scrollEl = this.scrollComponent.parentNode;
+        }
+        this.scrollHeight = scrollEl.scrollHeight;
+        this.scrollTop = scrollEl.scrollTop;
+      }
+    }
+  }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
       this.attachScrollListener();
+      if (this.props.isReverse) {
+        var scrollEl = window;
+        if (this.props.useWindow === false) {
+          scrollEl = this.scrollComponent.parentNode;
+        }
+        scrollEl.scrollTop = this.scrollTop + (scrollEl.scrollHeight - this.scrollHeight);
+      }
     }
   }, {
     key: 'componentWillUnmount',
@@ -149,7 +168,7 @@ var InfiniteScroll = function (_Component) {
         _this2.scrollComponent = node;
       };
 
-      return _react2.default.createElement(element, props, children, hasMore && (loader || this.defaultLoader));
+      return _react2.default.createElement(element, props, isReverse ? hasMore && (loader || this.defaultLoader) : children, isReverse ? children : hasMore && (loader || this.defaultLoader));
     }
   }]);
 
