@@ -36,6 +36,7 @@ export default class InviewSensor extends React.Component {
 
   componentDidMount() {
     this.context.infiniteScrollComponent.scrollWindow.addEventListener('scroll', this.check);
+    this.check();
   }
 
   componentWillUnmount() {

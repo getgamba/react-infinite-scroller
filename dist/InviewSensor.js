@@ -42,6 +42,7 @@ var InviewSensor = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.context.infiniteScrollComponent.scrollWindow.addEventListener('scroll', this.check);
+      this.check();
     }
   }, {
     key: 'componentWillUnmount',
