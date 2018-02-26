@@ -52,6 +52,8 @@ var InviewSensor = function (_React$Component) {
   }, {
     key: 'check',
     value: function check() {
+      if (!document.hasFocus()) return;
+
       var el = _reactDom2.default.findDOMNode(this);
       var rect = el.getBoundingClientRect();
       var containmentRect = this.context.infiniteScrollComponent.scrollWindow.getBoundingClientRect();

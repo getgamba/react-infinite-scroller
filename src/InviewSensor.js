@@ -44,6 +44,9 @@ export default class InviewSensor extends React.Component {
   }
 
   check() {
+    if (!document.hasFocus())
+      return;
+
     var el = ReactDOM.findDOMNode(this);
     var rect = el.getBoundingClientRect();
     var containmentRect = this.context.infiniteScrollComponent.scrollWindow.getBoundingClientRect();
